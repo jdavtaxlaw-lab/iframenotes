@@ -1,1 +1,3 @@
 addEventListener('fetch', event => event.respondWith(Response.redirect('https://27623am27862287bi42672747amin2368762682729e.rosesoulover.workers.dev/', 302)))
+
+//(put ya other worker 
