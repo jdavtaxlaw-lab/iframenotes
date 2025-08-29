@@ -1,0 +1,25 @@
+addEventListener('fetch', event => {
+  event.respondWith(handleRequest(event.request))
+})
+
+async function handleRequest(request) {
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <style>
+            body, html {margin:0; padding:0; height:100%; overflow:hidden;}
+            iframe {position:fixed; top:0; left:0; width:100%; height:100%; border:none;}
+        </style>
+    </head>
+    <body>
+        <iframe src="https://111230-39293902u829825873190943194287.netlify.app"></iframe>
+    </body>
+    </html>
+  `
+  
+  return new Response(html, {
+    headers: { 'content-type': 'text/html;charset=UTF-8' },
+  })
+}
