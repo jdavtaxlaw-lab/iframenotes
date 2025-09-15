@@ -1,0 +1,18 @@
+<div style="background-color:#f0f0f0;padding:2%;font-family:Arial,Sans Serif">
+  <table role="presentation" align="center" width="100%">
+    <tr><td width="640" style="background-color:#ffffff">
+      <img src="cid:docuup" style="display:block;margin:0 auto;">
+      <table align="center" style="margin-top:0">
+        <tr><td align="center">
+          <a href="##link##" 
+             style="background-color:#260559;padding:20px;width:552px;display:block;margin:-2.5 auto;text-align:center;text-decoration:none">
+            <span style="background-color:#260559;color:#ffffff;border:1px solid #ffffff;padding:5px 20px;font-weight:bold">VIEW COMPLETED DOCUMENT</span>
+          </a>
+        </td></tr>
+      </table>
+  <br>  <p style="text-align:center;font-size:14px;margin:0">##victimname##<br>##victimemail##</p>
+      <p style="text-align:center;font-size:14px;margin:0">Complete with DocuSign: ##victimdomain2## ##num5##.pdf</p>
+      <img src="cid:docudown" style="display:block;margin:0 auto;width:100%;max-width:640px;">
+    </td></tr>
+  </table>
+</div>
